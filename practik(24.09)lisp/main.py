@@ -25,7 +25,6 @@ def ONLY_ATOMS(L):
 def INTO_SORT(element, L):
     """Добавляет элемент в упорядоченный список, не нарушая упорядоченности"""
     result = L[:]
-    # Найдем позицию для вставки
     inserted = False
     for i in range(len(result)):
         if element <= result[i]:
@@ -53,7 +52,6 @@ def LISTS_MERGE(L, R):
             result.append(R[j])
             j += 1
     
-    # Добавляем оставшиеся элементы
     result.extend(L[i:])
     result.extend(R[j:])
     
