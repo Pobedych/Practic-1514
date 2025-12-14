@@ -1,0 +1,64 @@
+(DEFUN MAKE_LIST_N (N)
+  (COND
+    ((= N 0) NIL)
+    (T (CONS N (MAKE_LIST_N (- N 1))))
+  )
+)
+
+
+(DEFUN MY_APPEND (L1 L2)
+  (COND
+    ((NULL L1) L2)
+    (T (CONS (CAR L1) (MY_APPEND (CDR L1) L2)))
+  )
+)
+
+
+(DEFUN ADD_ELEMENT_TO_ALL (ELEMENT SUBSETS)
+  (COND
+    ((NULL SUBSETS) NIL)
+    (T (CONS (CONS ELEMENT (CAR SUBSETS)) 
+             (ADD_ELEMENT_TO_ALL ELEMENT (CDR SUBSETS))))
+  )
+)
+
+
+(DEFUN GENERATE_SUBSETS (L)
+  (COND
+    ((NULL L) (LIST NIL))
+    (T 
+      (LET ((REST_SUBSETS (GENERATE_SUBSETS (CDR L))))
+        (MY_APPEND 
+          REST_SUBSETS
+          (ADD_ELEMENT_TO_ALL (CAR L) REST_SUBSETS)
+        )
+      )
+    )
+  )
+)
+
+
+(DEFUN ALL_SUBSETS (N)
+  (GENERATE_SUBSETS (MAKE_LIST_N N))
+)
+
+(DEFUN GENERATE_K_SUBSETS (L K)
+  (COND
+    ((= K 0) (LIST NIL))
+    ((NULL L) NIL)
+    ((> K (LENGTH L)) NIL)
+    ((= (LENGTH L) K) (LIST L))
+    (T 
+      (MY_APPEND
+        (ADD_ELEMENT_TO_ALL (CAR L) (GENERATE_K_SUBSETS (CDR L) (- K 1)))
+        (GENERATE_K_SUBSETS (CDR L) K)
+      )
+    )
+  )
+)
+
+
+(DEFUN ALL_K_SUBSETS (N K)
+  (GENERATE_K_SUBSETS (MAKE_LIST_N N) K)
+)
+
