@@ -1,4 +1,3 @@
-def generate_permutations(sequence):
     elements = list(sequence)
     length = len(elements)
     if length == 0:
@@ -32,12 +31,3 @@ def generate_permutations(sequence):
         all_per.append(tuple(elements))
     
     return tuple(all_per)
-
-print(
-    '\n'.join(
-        ' '.join(str_variant) for str_variant in[
-            map(str, sorted_variant) for sorted_variant in sorted(generate_permutations([1, 2, 3]))
-        ]
-    )
-)
-
