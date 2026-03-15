@@ -1,0 +1,9 @@
+# Virtual environment
+.venv/
+
+# IDE project files (e.g., PyCharm, IntelliJ IDEA)
+.idea/
+
+# Python byte‑code cache
+__pycache__/
+*.py[cod]
